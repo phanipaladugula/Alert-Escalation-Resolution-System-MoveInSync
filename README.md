@@ -1,231 +1,214 @@
-# 🚨 Alert Escalation & Resolution System  
-### Enterprise-Grade Incident Management & Automated Escalation Platform
+# 🚨 Alert Escalation & Resolution System
 
-The **Alert Escalation & Resolution System** is a full-stack enterprise-level alert management platform designed to automate incident handling, enforce SLA compliance, and provide real-time operational visibility.
-
-This system eliminates manual alert tracking, ensures intelligent escalation, and maintains complete audit traceability through a scalable backend architecture.
-
----
-
-# 📌 Project Overview
-
-This project demonstrates:
-
-- Clean layered architecture (Controller → Service → Repository)
-- Rule-based escalation engine
-- SLA breach detection
-- JWT-based authentication
-- Role-based access control
-- Event logging & audit tracking
-- Frontend + Backend integration
-- Production-ready configuration management
+![Java](https://img.shields.io/badge/Java-21-red)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.x-brightgreen)
+![Security](https://img.shields.io/badge/SpringSecurity-JWT-blue)
+![Database](https://img.shields.io/badge/Database-MySQL-orange)
+![Frontend](https://img.shields.io/badge/Frontend-React-blueviolet)
+![Build](https://img.shields.io/badge/Build-Maven-blue)
 
 ---
 
-# 🏗️ High-Level Architecture
+## 📌 Overview
+
+The **Alert Escalation & Resolution System** is a production-style full-stack alert management platform engineered to automate incident handling, enforce SLA compliance, and provide real-time operational visibility.
+
+The system demonstrates:
+
+- Secure JWT-based authentication
+- Automated rule-driven escalation engine
+- Clean layered backend architecture
+- Transaction-safe alert lifecycle management
+- Full-stack integration (React + Spring Boot)
+- UML-driven system design documentation
+
+This project reflects real-world enterprise backend engineering principles used in incident management and monitoring systems.
+
+---
+
+# 🏗️ Architecture Overview
+
+## High-Level System Flow
 
 ```
-Frontend (React UI)
+Client (React Frontend)
         ↓
-Spring Boot REST API
+REST API (Spring Boot)
         ↓
-Alert Controller
+Controller Layer
         ↓
-Alert Service
+Service Layer (Business Logic + Escalation Engine)
         ↓
-Rule Engine
-        ↓
-Escalation Service
-        ↓
-Notification Service
+Repository Layer (JPA/Hibernate)
         ↓
 MySQL Database
 ```
 
-Architecture follows:
+### Architectural Principles
 
-- Separation of concerns
-- Stateless authentication
-- Thread-safe service layer
-- Transactional persistence
-- Exception handling framework
-
----
-
-# 📊 System Design Diagrams
-
-## 1️⃣ Entity Relationship Diagram (Database Design)
-
-This diagram illustrates:
-
-- User–Role relationship
-- Alert lifecycle mapping
-- Alert–EventLog one-to-many relationship
-- Escalation rule structure
-- Notification linkage
-
-📌 Diagram Location:
-```
-/docs/er-diagram.png
-```
+- Layered Architecture (Controller → Service → Repository)
+- Separation of Concerns
+- Stateless Authentication (JWT)
+- Transactional Data Integrity
+- Global Exception Handling
+- Clean Code & Maintainability
 
 ---
 
-## 2️⃣ Sequence Diagram — Alert Processing Flow
+# 🔐 Security Architecture
 
-Processing Flow:
+The system uses **JWT-based stateless authentication**.
 
-User → REST API → AlertController → AlertService → RuleEngine → EscalationService → NotificationService → Repository
+### Authentication Flow
 
-Key Characteristics:
+1. User registers
+2. Password stored using BCrypt hashing
+3. User logs in
+4. JWT token generated
+5. Token sent in `Authorization: Bearer <token>`
+6. Backend validates token for each request
 
-- Idempotent processing
-- Escalation level tracking
-- SLA validation
-- State-aware updates
-- Audit event creation
+Security Highlights:
 
-📌 Diagram Location:
-```
-/docs/sequence-diagram.png
-```
-
----
-
-## 3️⃣ UML Class Diagram — Domain Model
-
-Highlights:
-
-- User–Alert mapping
-- Alert–EventLog relationship
-- Alert–EscalationRule mapping
-- Layered service architecture
-
-📌 Diagram Location:
-```
-/docs/class-diagram.png
-```
+- No session storage
+- Password hashing using BCrypt
+- Secured endpoints
+- Token validation filter
+- Frontend protected routes
 
 ---
 
-## 4️⃣ Use Case Diagram — Actor Interaction
+# 🔄 Alert Lifecycle & Escalation Engine
 
-Actors:
+## Alert States
 
-- Admin
-- Operator
-- System
+- `OPEN`
+- `ESCALATED`
+- `RESOLVED`
 
-Functional Capabilities:
+## Processing Pipeline
+
+1. Alert created
+2. Persisted to database
+3. Escalation rules evaluated
+4. SLA conditions validated
+5. Status updated if required
+6. Event logged
+7. Resolution tracked
+
+### Escalation Engine Capabilities
+
+- Severity-based escalation
+- Time-based SLA evaluation
+- Duplicate escalation prevention
+- Idempotent status transitions
+- Event audit logging
+
+---
+
+# 📊 UML System Design
+
+All diagrams are located inside `/docs`.
+
+## Entity Relationship Diagram
+
+![ER Diagram](docs/ER.png)
+
+Represents:
+
+- Alert entity
+- Event logs
+- User mapping
+- Alert lifecycle structure
+
+---
+
+## Sequence Diagram — Alert Processing
+
+![Sequence Diagram](docs/SequenceDiagram_AlertIngestionFlow.png)
+
+Represents:
+
+- REST request flow
+- Rule evaluation
+- Escalation logic
+- Persistence lifecycle
+
+---
+
+## UML Class Diagram — Domain Model
+
+![Class Diagram](docs/UML.png)
+
+Represents:
+
+- User interactions
+- Alert creation
+- Escalation
+- Resolution workflow
+
+---
+
+## Architecture Diagram
+
+![Use Case Diagram](https://github.com/phanipaladugula/Alert-Escalation-Resolution-System-MoveInSync/blob/main/docs/Architecture%20Diagram.png)
+
+Represents:
+- Layer separation
+
+
+---
+
+# ⚙️ Core Features
+
+## Alert Management
 
 - Create alerts
-- Configure escalation rules
-- Monitor alerts
-- Resolve incidents
-- Automatic escalation
+- View alerts
+- Update status
+- Resolve alerts
+- Track lifecycle history
 
-📌 Diagram Location:
-```
-/docs/usecase-diagram.png
-```
+## Automated Escalation
 
----
+- SLA breach detection
+- Severity evaluation
+- Status auto-transition
+- Event generation
 
-# ⚙️ Features
+## Audit Logging
 
-## 🔹 Alert Management
+- Escalation events
+- Resolution events
+- Full lifecycle traceability
 
-- Create alerts
-- Update alert status
-- View alert history
-- Severity categorization
-- SLA monitoring
+## Exception Handling
 
-Alert States:
+- Centralized global handler
+- Standardized error responses
+- Validation management
 
-- OPEN
-- ESCALATED
-- RESOLVED
+## Frontend Dashboard
 
----
-
-## 🔹 Rule-Based Escalation Engine
-
-Automatic escalation when:
-
-- SLA time exceeded
-- Severity threshold crossed
-- Alert remains unresolved
-- Manual override triggered
-
-Engine supports:
-
-- Multi-level escalation
-- Duplicate prevention
-- Time-based evaluation
-- Configurable rules
+- Alert listing
+- Status filtering
+- Secure API communication
+- Responsive UI
 
 ---
 
-## 🔹 Event & Audit Logging
-
-- Tracks every alert transition
-- Stores escalation timestamps
-- Maintains full audit history
-- Supports compliance verification
-
----
-
-## 🔹 Authentication & Security
-
-- JWT authentication
-- BCrypt password hashing
-- Role-based authorization
-- Protected REST endpoints
-- Stateless security configuration
-
----
-
-## 🔹 Reliability & Edge Case Handling
-
-- Duplicate alert prevention
-- Escalation loop protection
-- Concurrent request safety
-- Global exception handling
-- Transaction rollback safety
-
----
-
-# 🧠 Alert Processing Lifecycle
-
-1. Alert received via REST API  
-2. Request authenticated (JWT)  
-3. Alert persisted in database  
-4. Rule engine evaluates conditions  
-5. SLA validation executed  
-6. Escalation triggered (if required)  
-7. Event log created  
-8. Notification dispatched  
-9. Updated response returned  
-
-Time Complexity:
-
-- Rule evaluation: O(n)
-- Event logging: O(1)
-- Status update: O(1)
-
----
-
-# 🛠️ Tech Stack
+# 🛠️ Technology Stack
 
 ## Backend
 
 - Java 21
 - Spring Boot
-- Spring Security (JWT)
+- Spring Security
+- JWT Authentication
 - JPA / Hibernate
 - MySQL
 - Maven
+- Lombok
 
 ## Frontend
 
@@ -236,7 +219,37 @@ Time Complexity:
 
 ---
 
-# 🚀 Quick Start
+# 📂 Repository Structure
+
+```
+/Alert-Escalation-Resolution-System
+│
+├── backend
+│   ├── controller
+│   ├── service
+│   ├── repository
+│   ├── entity
+│   ├── config
+│   ├── exception
+│   └── AlertSystemApplication.java
+│
+├── frontend
+│   ├── src
+│   ├── package.json
+│   └── tailwind.config.js
+│
+├── docs
+│   ├── er-diagram.png
+│   ├── sequence-diagram.png
+│   ├── class-diagram.png
+│   └── usecase-diagram.png
+│
+└── README.md
+```
+
+---
+
+# 🚀 Getting Started
 
 ## Prerequisites
 
@@ -263,7 +276,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-Configure:
+Configure `application.properties`:
 
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/alertsystem
@@ -282,7 +295,7 @@ npm install
 npm run dev
 ```
 
-Visit:
+Access:
 
 ```
 http://localhost:5173
@@ -290,69 +303,62 @@ http://localhost:5173
 
 ---
 
-# 📂 Repository Structure
+# 📈 Performance Considerations
 
-```
-/Alert-Escalation-Resolution-System
-├── /frontend
-│   ├── /src
-│   ├── package.json
-│   └── tailwind.config.js
-│
-├── /backend
-│   ├── /controller
-│   ├── /service
-│   ├── /repository
-│   ├── /entity
-│   ├── /config
-│   ├── /exception
-│   └── AlertSystemApplication.java
-│
-├── /docs
-│   ├── er-diagram.png
-│   ├── sequence-diagram.png
-│   ├── class-diagram.png
-│   └── usecase-diagram.png
-│
-└── README.md
-```
+- Rule evaluation: O(n)
+- Status update: O(1)
+- Event logging: O(1)
+- Stateless authentication improves scalability
+- Clean transaction boundaries ensure data consistency
 
 ---
 
-# 📈 Trade-Off Decisions
+# 🧪 Reliability & Edge Case Handling
 
-| Decision | Trade-Off |
-|----------|-----------|
-| Stateless JWT | Scalable but manual revocation needed |
-| Rule-based engine | Simple & predictable vs ML-driven |
-| REST architecture | Simpler vs event-stream system |
-| In-memory checks | Fast vs non-persistent |
-
----
-
-# 🧪 Testing Checklist
-
-- Authentication flow verified
-- Escalation scenarios tested
-- SLA breach tested
-- Concurrent requests tested
-- Error handling validated
-- No hardcoded secrets
-- Environment variables externalized
+- Duplicate escalation prevention
+- Escalation loop control
+- Transaction rollback safety
+- Token validation on every request
+- Secure password storage
+- Centralized exception mapping
 
 ---
 
-# 🎯 Final Outcome
+# 🔮 Future Enhancements
 
-This system delivers:
+- Role-Based Access Control (RBAC)
+- Email/SMS notification integration
+- WebSocket real-time updates
+- Redis caching layer
+- Microservices architecture
+- Cloud-native deployment (Docker + Kubernetes)
 
-- Automated incident handling
-- Intelligent escalation workflows
-- SLA enforcement
-- Secure access control
-- Audit-compliant event tracking
-- Enterprise-ready backend architecture
+---
 
-The project reflects real-world production system design aligned with scalable enterprise alert management platforms.
+# 🎯 Engineering Highlights
+
+- Enterprise-style layered architecture
+- JWT-secured REST APIs
+- Automated escalation engine
+- SLA monitoring logic
+- UML-driven documentation
+- Production-ready configuration
+- Full-stack integration
+
+---
+
+
+# ⭐ Final Outcome
+
+The **Alert Escalation & Resolution System** delivers:
+
+- Secure incident handling
+- Automated escalation workflows
+- SLA-compliant processing
+- Clean backend design
+- Audit-compliant lifecycle tracking
+- Real-world engineering practices
+
+This project demonstrates scalable, maintainable, and production-oriented system design aligned with modern enterprise alert management platforms.
 
 ---
