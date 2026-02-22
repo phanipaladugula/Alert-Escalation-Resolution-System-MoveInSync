@@ -1,0 +1,22 @@
+# Backend
+target/
+*.log
+*.class
+*.jar
+*.war
+.mvn/
+.idea/
+*.iml
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
